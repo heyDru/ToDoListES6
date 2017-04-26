@@ -1,0 +1,54 @@
+
+
+.inBlock{
+    margin: 0 auto;
+    margin-top: 50px;
+    float: none;
+    padding: 10px;
+    font-size: 25px;
+    background-color:#a7d056;
+    min-height: 50px;
+    border-radius: 10px;
+    
+}
+
+.queationText{
+    margin-top: 5px;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.enterText{
+    border-radius: 5px;
+    width: 500px;
+}
+
+.addButton {
+    display: block;
+    margin: auto;
+    margin-top: 10px;
+    width: 200px;
+    font-size: 20px;
+}
+
+.listSection{
+     margin: 0 auto;
+     margin-top: -7px;
+    float: none;
+    padding: 10px;
+    font-size: 25px;
+    background-color:#fcfbac;
+    min-height: 50px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.separateLine {
+    border:1px solid #565652;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+ul.listSection li{
+    display: block;
+}

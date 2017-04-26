@@ -1,0 +1,77 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="vendors/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="vendors/bootstrap/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <!--<div class="container">
+
+        <header>
+            <div class="col-md-6 text-center inBlock">
+                <div>Hello UserName</div>
+                <div class="queationText">What are you going to do?</div>
+                <input type="text" class="enterText" id="newItem" placeholder="I'm going to...">
+                <button type="submit" class="btn btn-submit addButton" id="add">Lets do it!</button>
+            </div>
+        </header>
+
+        <div class="col-md-6 listSection">
+            <ul class="toDoList" id="toDoList">
+                <hr class="separateLine" />
+            </ul>
+        </div>
+
+    </div>-->
+
+
+    <!--Base markup-template-->
+    <script type="text/template" id="base-template">
+        <div class="container">
+            <header>
+                <div class="col-md-6 text-center inBlock">
+                    <div>Hello UserName</div>
+                    <div class="queationText">What are you going to do?</div>
+                    <form>
+                        <input type="text" class="enterText" id="newItem" placeholder="I'm going to...">
+                        <button type="submit" class="btn btn-submit addButton" id="addBtn">Lets do it!</button>
+                    </form>
+                </div>
+            </header>
+            <div class="col-md-6 listSection" id="listSection">
+            </div>
+        </div>
+    </script>
+
+
+    <!--toDoList  markup-template-->
+
+    <script type="text/template" id="toDoList-template">
+
+        <ul>
+            <% toDoList.forEach(function(item) {%>
+                <li>
+                    <%-item._text%>
+                        <button class="btn btn-danger btn-md" id="deleteBtn-<%-item.id%>">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                </li>
+                <% }); %>
+        </ul>
+    </script>
+
+
+    <script src="dist/bundle.js"></script>
+
+
+
+</body>
+
+</html>
