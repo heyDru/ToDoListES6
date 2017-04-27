@@ -53,7 +53,7 @@
 
     <!--toDoList  markup-template-->
 
-    <script type="text/template" id="toDoList-template">
+    <!--<script type="text/template" id="toDoList-template">
 
         <ul>
             <% toDoList.forEach(function(item) {%>
@@ -62,6 +62,18 @@
                         <button class="btn btn-danger btn-md" id="deleteBtn-<%-item.id%>">
                             <span class="glyphicon glyphicon-remove"></span>
                         </button>
+                </li>
+                <% }); %>
+        </ul>
+    </script>-->
+
+       <script type="text/template" id="toDoList-template">
+
+        <ul>
+            <% transferToDoList.forEach(function(item) {%>
+                <li >
+                    <%= item.toDo_text%>
+                        <%- item.btn.deleteButton%>
                 </li>
                 <% }); %>
         </ul>
