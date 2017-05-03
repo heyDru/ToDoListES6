@@ -1,11 +1,18 @@
 import _ from 'lodash';
+import { Events } from '..\\services\\Events.js';
+import { AddHandler } from '..\\services\\handlers\\addHandler.js';
+
+const events = new Events();
+const addHandler = new AddHandler();
+
 export class Markup {
 
     GenerateBaseMarkup() {
-        let base = document.getElementById('base-template').innerHTML;
-        let html = _.template(base)({});
+        let baseTemplate = document.getElementById('base-template').innerHTML;
+        let html = _.template(baseTemplate)();
 
         document.write(html);
+        this.GenerateAddForm();
     }
 
     GenerateItemMarkup(toDoList) {
@@ -22,7 +29,8 @@ export class Markup {
             deleteButton.appendChild(deleteIcon);
             deleteButton.className = "btn btn-danger btn-md";
 
-     
+            let transferToDoItem = new Object();
+
             transferToDoItem.toDo = toDo;
             transferToDoItem.btn = deleteButton;
 
@@ -33,10 +41,56 @@ export class Markup {
         listSection.innerHTML = html({ transferToDoList });
     }
 
+    GenerateElement(tag, attributes, innerHTML) {
+        tag = tag || {};
+        attributes = attributes || {};
+        innerHTML = innerHTML || {};
+        let element = document.createElement(tag);
+
+        _.each(attributes, function (value, attribute) {
+            element.setAttribute(attribute.toString(), value);
+        });
+
+        element.innerHTML = innerHTML;
+
+        return element;
+    }
+
+    GenerateAddForm() {
+        // Create AddForm element
+        let formAttr = {
+            id: "addForm"
+        }
+        let formAdd = this.GenerateElement('form', formAttr);
+
+        // Create AddInput element
+        let inputAtttr = {
+            id: "addInput",
+            type: 'text',
+            class: "enterText",
+            placeholder: "I'm going to..."
+        };
+        let inputAdd = this.GenerateElement('input', inputAtttr);
+
+        // Create AddButton element
+        let buttonAttr = {
+            id: "addBtn",
+            type: 'submit',
+            class: "btn btn-submit addButton",
+        };
+        let buttonAdd = this.GenerateElement('button', buttonAttr, 'Lets do it!');
+
+        //Make Form
+        formAdd.appendChild(inputAdd);
+        formAdd.appendChild(buttonAdd);
+
+
+        let div = document.getElementById('baseHead');
+
+        events.on(formAdd, 'submit', addHandler.createElement(inputAdd.value));
+
+        div.appendChild(formAdd);
+    }
+
 }
 
-
-        // let button = document.createElement('button');
-        // button.addEventListener('click', function (event) {
-
-        // });

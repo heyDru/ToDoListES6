@@ -2,13 +2,14 @@ import { ToDoItem } from '..\\model\\ToDoItem.js';
 import { IdGenerator } from '..\\services\\IdGenerator.js';
 import {DataStorage} from '..\\services\\DataStorage.js';
 import {Markup} from '..\\services\\Markup.js';
-import {Event} from '..\\services\\Event.js';
+//import {Event} from '..\\services\\Event.js';
 
 const idGenerator = new IdGenerator();
 const dataStorage = new DataStorage();
 const markup = new Markup();
-const event = new Event();
-export class ToDoItemManager {
+
+//const event = new Event();
+export  class ToDoItemManager {
 
     Create(newText) {
         let newId = idGenerator.getId();
@@ -21,7 +22,7 @@ export class ToDoItemManager {
 
         let toDoItem =new ToDoItem(toDoItemDetails);
         dataStorage.AddToDoItem(toDoItem);
-        return toDoItem; ////// ?????
+         return toDoItem; ////// ?????
     }
 
     Edit(id,newText,newDone){
@@ -33,13 +34,14 @@ export class ToDoItemManager {
         dataStorage.UpdateToDoItem(id,toDoItemDetails);
     }
 
+// Должен возвращать массив элементов, а в маркапе должен отображать 
     GetList() {
         let self = this;
         let toDoList =  dataStorage.GetToDoList();
         markup.GenerateBaseMarkup();
         
         let addBtn = document.getElementById('addBtn');
-        event.On(addBtn,'click',self.Create);
+        //event.On(addBtn,'click',self.Create);
         
         markup.GenerateItemMarkup(toDoList);
     }
