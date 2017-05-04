@@ -1,5 +1,4 @@
 
-
 export class Events {
 
     on(element, eventName, callback) {

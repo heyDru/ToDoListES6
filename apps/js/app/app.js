@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import { concat } from 'lodash';
-import { ToDoItemManager } from '..\\services\\ToDoItemManager.js';
+import { ToDoItemManager } from '..\\services\\toDoItemManager.js';
 
 //const markup = new Markup();
-let toDoItemManager = new ToDoItemManager();
+const toDoItemManager = new ToDoItemManager();
 toDoItemManager.GetList();
 
 //  toDoItemManager.Create('hello');

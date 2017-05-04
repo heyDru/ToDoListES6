@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { Events } from '..\\services\\Events.js';
+import { Events } from '..\\services\\events.js';
 import { AddHandler } from '..\\services\\handlers\\addHandler.js';
 
 const events = new Events();
@@ -87,7 +87,7 @@ export class Markup {
 
         let div = document.getElementById('baseHead');
 
-        events.on(formAdd, 'submit', addHandler.createElement(inputAdd.value));
+        events.on(formAdd, 'submit', addHandler.CreateToDoItem(inputAdd.value));
 
         div.appendChild(formAdd);
     }

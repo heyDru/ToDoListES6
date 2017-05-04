@@ -1,14 +1,12 @@
-import { ToDoItem } from '..\\model\\ToDoItem.js';
-import { IdGenerator } from '..\\services\\IdGenerator.js';
-import {DataStorage} from '..\\services\\DataStorage.js';
-import {Markup} from '..\\services\\Markup.js';
-//import {Event} from '..\\services\\Event.js';
+import { ToDoItem } from '..\\model\\toDoItem.js';
+import { IdGenerator } from '..\\services\\idGenerator.js';
+import {DataStorage} from '..\\services\\dataStorage.js';
+import {Markup} from '..\\services\\markup.js';
 
 const idGenerator = new IdGenerator();
 const dataStorage = new DataStorage();
 const markup = new Markup();
 
-//const event = new Event();
 export  class ToDoItemManager {
 
     Create(newText) {
@@ -22,7 +20,7 @@ export  class ToDoItemManager {
 
         let toDoItem =new ToDoItem(toDoItemDetails);
         dataStorage.AddToDoItem(toDoItem);
-         return toDoItem; ////// ?????
+        // return toDoItem; ////// ?????
     }
 
     Edit(id,newText,newDone){
@@ -41,7 +39,7 @@ export  class ToDoItemManager {
         markup.GenerateBaseMarkup();
         
         let addBtn = document.getElementById('addBtn');
-        //event.On(addBtn,'click',self.Create);
+        vent.On(addBtn,'click',self.Create);
         
         markup.GenerateItemMarkup(toDoList);
     }

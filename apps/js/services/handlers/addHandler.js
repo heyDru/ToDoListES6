@@ -1,10 +1,12 @@
-import { ToDoItemManager } from '..\\..\\services\\ToDoItemManager.js';
+import { ToDoItemManager } from '..\\..\\services\\toDoItemManager.js';
+
+
 const toDoItemManager = new ToDoItemManager();
 
-export class addFormHandlers {
+export class AddHandler {
     
         CreateToDoItem (text) {
-            toDoItemManager.CreateToDoItem(text);
+            toDoItemManager.Create(text);
         }
     }
 
