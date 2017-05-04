@@ -1,5 +1,5 @@
 
-export class Events {
+class Events {
 
     on(element, eventName, callback) {
         element.addEventListener(eventName, callback, false);
@@ -24,3 +24,5 @@ export class Events {
     }
 
 }
+
+export const events = new Events();

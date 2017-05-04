@@ -1,10 +1,14 @@
-import _ from 'lodash';
-import { concat } from 'lodash';
-import { ToDoItemManager } from '..\\services\\toDoItemManager.js';
+// import _ from 'lodash';
+// import { concat } from 'lodash';
+import { toDoItemManager } from '../services/todo-item-manager';
 
 //const markup = new Markup();
-const toDoItemManager = new ToDoItemManager();
-toDoItemManager.GetList();
+
+export class App {
+  constructor() {
+    toDoItemManager.GetList();
+  }
+}
 
 //  toDoItemManager.Create('hello');
 

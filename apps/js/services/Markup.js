@@ -1,8 +1,7 @@
 import _ from 'lodash';
-import { Events } from '..\\services\\events.js';
-import { AddHandler } from '..\\services\\handlers\\addHandler.js';
+import { events } from './events.js';
+import { AddHandler } from './handlers/add-handler.js';
 
-const events = new Events();
 const addHandler = new AddHandler();
 
 export class Markup {

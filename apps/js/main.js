@@ -1,1 +1,3 @@
-console.log("hello!");
+import { App } from './app/app';
+
+const app = new App();
