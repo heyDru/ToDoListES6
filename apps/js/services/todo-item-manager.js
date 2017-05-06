@@ -37,15 +37,15 @@ class ToDoItemManager {
         dataStorage.UpdateToDoItem(id,toDoItemDetails);
     }
 
+    Delete(id){
+        dataStorage.DeleteToDoItem(id);
+    }
+
 // Должен возвращать массив элементов, а в маркапе должен отображать 
     GetList() {
         let self = this;
         let toDoList =  dataStorage.GetToDoList();
         markup.GenerateBaseMarkup();
-        
-        let addBtn = document.getElementById('addBtn');
-        events.on(addBtn,'click',self.Create);
-        
         markup.GenerateItemMarkup(toDoList);
     }
 }

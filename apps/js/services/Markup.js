@@ -1,4 +1,4 @@
-import _ from 'lodash';
+//import _ from 'lodash';
 import { events } from './events.js';
 import { AddHandler } from './handlers/add-handler.js';
 
@@ -7,37 +7,106 @@ const addHandler = new AddHandler();
 export class Markup {
 
     GenerateBaseMarkup() {
-        let baseTemplate = document.getElementById('base-template').innerHTML;
-        let html = _.template(baseTemplate)();
+        // let baseTemplate = document.getElementById('base-template').innerHTML;
+        // let html = _.template(baseTemplate)();
 
-        document.write(html);
+        // document.write(html);
         this.GenerateAddForm();
     }
 
     GenerateItemMarkup(toDoList) {
+
         let listSection = document.getElementById('listSection');
-        let listElements = document.getElementById('toDoList-template').innerHTML;
+        let self = this;
+        
+        
+        toDoList.forEach(function(toDo) {
+            let toDoContainerAttr = {
+                class: 'col-md-12 row toDo-container'
+            };
+            let toDoContainerEl = self.GenerateElement('div', toDoContainerAttr);
 
-        let transferToDoList = [];
+            //Generate CheckBox
+            let toDoCheckboxContainerAttr = {
+                class: 'col-md-1 toDo-checkBox-container'
+            };
+            let toDoCheckboxContainerEl = self.GenerateElement('div', toDoCheckboxContainerAttr);
 
-        _.each(toDoList, function (toDo) {
-            let deleteButton = document.createElement('button');
-            let deleteIcon = document.createElement('span');
-            deleteIcon.className = "glyphicon glyphicon-remove";
+            let todoCheckboxAttr = {
+                class: 'glyphicon glyphicon-' + (toDo.done ? 'check' : 'unchecked')
+            };
+            let todoCheckboxEl = self.GenerateElement('span', todoCheckboxAttr);
+            toDoCheckboxContainerEl.appendChild(todoCheckboxEl);
+            toDoContainerEl.appendChild(toDoCheckboxContainerEl);
 
-            deleteButton.appendChild(deleteIcon);
-            deleteButton.className = "btn btn-danger btn-md";
+            //Generate ToDo Text
+            let toDoTextContainerAttr = {
+                class: 'col-md-7 toDo-text-container ' + (toDo.done ? 'toDo-done' : 'toDo-undone')
+            };
+            let toDoTextContainerEl = self.GenerateElement('div', toDoTextContainerAttr);
+            let toDoTextEl = self.GenerateElement('span', null, toDo.text);
+            toDoContainerEl.appendChild(toDoTextEl);
 
-            let transferToDoItem = new Object();
+            //Generate ToDo Buttons
+            let toDoBtnContainerAttr = {
+                class: 'col-md-2 toDo-btn-container'
+            };
+            let toDoBtnContainerEl = self.GenerateElement('div', toDoBtnContainerAttr);
 
-            transferToDoItem.toDo = toDo;
-            transferToDoItem.btn = deleteButton;
+            let toDoDeleteBtnAttr = {
+                type: 'button',
+                class: 'btn btn-danger btn-xs'
+            };
+            let toDoDeleteBtnEl = self.GenerateElement('div', toDoDeleteBtnAttr, '<span class=\"glyphicon glyphicon-remove\"><\/span>');
+            toDoBtnContainerEl.appendChild(toDoDeleteBtnEl);
+            toDoContainerEl.appendChild(toDoBtnContainerEl);
 
-            transferToDoList.push(transferToDoItem);
+            listSection.appendChild(toDoContainerEl);
         });
-        let html = _.template(listElements);
-        console.log(transferToDoList);
-        listSection.innerHTML = html({ transferToDoList });
+        // _.each(toDoList, function (toDo) {
+        //     let toDoContainerAttr = {
+        //         class: 'col-md-12 row toDo-container'
+        //     };
+        //     let toDoContainerEl = self.GenerateElement('div', toDoContainerAttr);
+
+        //     //Generate CheckBox
+        //     let toDoCheckboxContainerAttr = {
+        //         class: 'col-md-1 toDo-checkBox-container'
+        //     };
+        //     let toDoCheckboxContainerEl = self.GenerateElement('div', toDoCheckboxContainerAttr);
+
+        //     let todoCheckboxAttr = {
+        //         class: 'glyphicon glyphicon-' + (toDo.done ? 'check' : 'unchecked')
+        //     };
+        //     let todoCheckboxEl = self.GenerateElement('span', todoCheckboxAttr);
+        //     toDoCheckboxContainerEl.appendChild(todoCheckboxEl);
+        //     toDoContainerEl.appendChild(toDoCheckboxContainerEl);
+
+        //     //Generate ToDo Text
+        //     let toDoTextContainerAttr = {
+        //         class: 'col-md-7 toDo-text-container ' + (toDo.done ? 'toDo-done' : 'toDo-undone')
+        //     };
+        //     let toDoTextContainerEl = self.GenerateElement('div', toDoTextContainerAttr);
+        //     let toDoTextEl = self.GenerateElement('span', null, toDo.text);
+        //     toDoContainerEl.appendChild(toDoTextEl);
+
+        //     //Generate ToDo Buttons
+        //     let toDoBtnContainerAttr = {
+        //         class: 'col-md-2 toDo-btn-container'
+        //     };
+        //     let toDoBtnContainerEl = self.GenerateElement('div', toDoBtnContainerAttr);
+
+        //     let toDoDeleteBtnAttr = {
+        //         type: 'button',
+        //         class: 'btn btn-danger btn-xs'
+        //     };
+        //     let toDoDeleteBtnEl = self.GenerateElement('div', toDoDeleteBtnAttr, '<span class=\"glyphicon glyphicon-remove\"><\/span>');
+        //     toDoBtnContainerEl.appendChild(toDoDeleteBtnEl);
+        //     toDoContainerEl.appendChild(toDoBtnContainerEl);
+
+        //     listSection.appendChild(toDoContainerEl);
+        // });
+
     }
 
     GenerateElement(tag, attributes, innerHTML) {
@@ -46,12 +115,17 @@ export class Markup {
         innerHTML = innerHTML || {};
         let element = document.createElement(tag);
 
-        _.each(attributes, function (value, attribute) {
-            element.setAttribute(attribute.toString(), value);
-        });
+        // _.each(attributes, function (value, attribute) {
+        //     element.setAttribute(attribute.toString(), value);
+        // });
 
-        element.innerHTML = innerHTML;
+        for (let key in attributes) {
+            element.setAttribute(key, attributes[key].toString());
+        }
 
+        if (innerHTML) {
+            element.innerHTML = innerHTML;
+        }
         return element;
     }
 
@@ -59,7 +133,7 @@ export class Markup {
         // Create AddForm element
         let formAttr = {
             id: "addForm"
-        }
+        };
         let formAdd = this.GenerateElement('form', formAttr);
 
         // Create AddInput element
@@ -82,14 +156,8 @@ export class Markup {
         //Make Form
         formAdd.appendChild(inputAdd);
         formAdd.appendChild(buttonAdd);
-
-
         let div = document.getElementById('baseHead');
-
-        events.on(formAdd, 'submit', addHandler.CreateToDoItem(inputAdd.value));
-
+        events.on(buttonAdd, 'submit', function () { addHandler.CreateToDoItem(inputAdd.value) });
         div.appendChild(formAdd);
     }
-
 }
-

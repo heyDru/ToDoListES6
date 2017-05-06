@@ -52,3 +52,11 @@
 ul.listSection li{
     display: block;
 }
+
+.toDo-done{
+    background-color: green;
+}
+
+.toDo-done{
+    background-color: blue   ;
+}
