@@ -28,25 +28,29 @@ class ToDoItemManager {
         // return toDoItem; ////// ?????
     }
 
-    Edit(id,newText,newDone){
-         let toDoItemDetails = {
-            id: id,
-            text: newText,
-            done: newDone,
-        };
-        dataStorage.UpdateToDoItem(id,toDoItemDetails);
+    Edit(toDo) {
+        // let toDoItemDetails = {
+        //     id: id,
+        //     text: newText,
+        //     done: newDone,
+        // };
+        dataStorage.UpdateToDoItem(toDo);
     }
 
-    Delete(id){
+    Delete(id) {
         dataStorage.DeleteToDoItem(id);
     }
 
-// Должен возвращать массив элементов, а в маркапе должен отображать 
+
+
+    // Должен возвращать массив элементов, а в маркапе должен отображать 
     GetList() {
         let self = this;
-        let toDoList =  dataStorage.GetToDoList();
-        markup.GenerateBaseMarkup();
-        markup.GenerateItemMarkup(toDoList);
+        let toDoList = dataStorage.GetToDoList();
+        markup.GenerateMarkup(toDoList);
+        events.subscribe('get-todos-list', function () {
+            self.GetList();
+        });
     }
 }
 

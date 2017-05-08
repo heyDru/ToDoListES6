@@ -9,7 +9,7 @@ export class DataStorage {
 
     if (!list) {
       console.error('No data in storage,just new created');
-      list=[];
+      list = [];
       return false;
     }
     else {
@@ -37,28 +37,33 @@ export class DataStorage {
     let list = localStorage.getItem(storageName);
     list = JSON.parse(list);
     let index = this.SearchById(id, list);
-    if (!index) {
+    if (index == "undefined") {
       alert("No Data TO Delete");
     }
-    list.splice(index, 1);
+    else {
+      list.splice(index, 1);
+      list = JSON.stringify(list);
+      localStorage.setItem(storageName, list);
+    }
+
+  }
+
+  UpdateToDoItem(toDo) {
+    let list = localStorage.getItem(storageName);
+    list = JSON.parse(list);
+    let index = this.SearchById(toDo._id, list);
+    list[index] = toDo;
     list = JSON.stringify(list);
     localStorage.setItem(storageName, list);
   }
 
-  UpdateToDoItem(id, newToDoItem) {
-    let list = localStorage.getItem(storageName);
-    list = JSON.parse(list);
-    let index = this.SearchById(id, list);
-    list[index] = newToDoItem;
-  }
-
   SearchById(id, toDoList) {
-    let index = function () {
-      for (let i = 0; i < list.length; i++) {
-        if (list[i].id === id)
-          return i;
+    let index;
+    for (let i = 0; i < toDoList.length; i++) {
+      if (toDoList[i]._id === id) {
+        index = i;
       }
-      return index;
-    };
+    }
+    return index;
   }
 }

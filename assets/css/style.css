@@ -1,9 +1,11 @@
-
+.frame{
+    margin-top: 30px;
+}
 
 .inBlock{
-    margin: 0 auto;
+    /*margin: 0 auto;
     margin-top: 50px;
-    float: none;
+    float: none;*/
     padding: 10px;
     font-size: 25px;
     background-color:#a7d056;
@@ -32,13 +34,11 @@
 }
 
 .listSection{
-     margin: 0 auto;
-     margin-top: -7px;
-    float: none;
+     /*/*margin: 0 auto;*/
+     margin-top: -5px;
     padding: 10px;
     font-size: 25px;
     background-color:#fcfbac;
-    min-height: 50px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
@@ -53,10 +53,22 @@ ul.listSection li{
     display: block;
 }
 
-.toDo-done{
-    background-color: green;
+.toDo-container{
+    padding: 15px;
+    font-size: 21px; 
+}
+
+.toDo-undone{
+    text-decoration:none;
 }
 
 .toDo-done{
-    background-color: blue   ;
+text-decoration: line-through;
+}
+
+/*.enterText{
+    min-width: 550px;
+}*/
+.toDoBtns{
+    margin-left:15px; 
 }

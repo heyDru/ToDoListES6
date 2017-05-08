@@ -19,7 +19,7 @@ class Events {
         document.dispatchEvent(event);
     }
 
-    deleteEvent() {
+    deleteEvent(eventName,callback) {
         document.removeEventListener(eventName, callback, false);
     }
 
